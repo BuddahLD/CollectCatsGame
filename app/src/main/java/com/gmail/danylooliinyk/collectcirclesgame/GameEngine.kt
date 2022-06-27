@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
 
-class GameEngine {
+class GameEngine : LeGameEngine {
 
     private var gameScene: ViewGroup? = null
     private val gameSceneScoped
@@ -189,10 +189,23 @@ class GameEngine {
         spawnCat(position, color)
     }
 
-    companion object {
+    override fun init(frameRate: Int) {
+        val msPerFrame = ONE_SECOND_MS / frameRate
+        tickerFlow(period = msPerFrame.milliseconds)
+            .onEach {
 
+            }
+            .launchIn(coroutineScope)
+    }
+
+    override fun onNextFrame(render: () -> Unit) {
+
+    }
+
+    companion object {
         private const val MAX_CATS_NUMBER = 7
         private const val TEXT_COLOR = Color.WHITE
         private const val SHOW_DEBUG = true
+        private const val ONE_SECOND_MS = 1000
     }
 }
