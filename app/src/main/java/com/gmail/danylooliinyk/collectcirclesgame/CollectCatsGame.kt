@@ -5,8 +5,6 @@ import kotlinx.coroutines.CoroutineScope
 
 class CollectCatsGame(
     sceneView: FrameLayoutImageViewSelfDelete,
-    sceneWidthPx: Int,
-    sceneHeightPx: Int,
     coroutineScope: CoroutineScope
 ) {
 
@@ -16,11 +14,7 @@ class CollectCatsGame(
     private var catsCombo: Int = 0
 
     init {
-        gameScene = CatsGameScene(
-            sceneView = sceneView,
-            sceneWidthPx = sceneWidthPx,
-            sceneHeightPx = sceneHeightPx
-        )
+        gameScene = CatsGameScene(sceneView = sceneView)
         screenRefresher = ScreenRefresher(
             REFRESH_RATE_60,
             coroutineScope,

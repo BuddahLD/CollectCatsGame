@@ -14,9 +14,7 @@ import androidx.core.view.doOnLayout
 import com.gmail.danylooliinyk.collectcirclesgame.Const.IS_DEBUG
 
 class CatsGameScene(
-    private var sceneView: ViewGroup? = null,
-    private var sceneWidthPx: Int = 0,
-    private var sceneHeightPx: Int = 0
+    private var sceneView: ViewGroup? = null
 ) {
 
     private val tvCatsCollected: TextView
@@ -27,6 +25,8 @@ class CatsGameScene(
         get() = sceneView?.context ?: throw IllegalStateException("Accessing context out of scope")
     private val catsCount
         get() = sceneViewScoped.children.count { it is ImageView }
+    private var sceneWidthPx: Int = 0
+    private var sceneHeightPx: Int = 0
 
     // Debug
     private lateinit var tvDebugCats: TextView

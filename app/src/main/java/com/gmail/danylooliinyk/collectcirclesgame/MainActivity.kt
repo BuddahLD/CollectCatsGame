@@ -12,11 +12,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
 
         val flGameScene = findViewById<FrameLayoutImageViewSelfDelete>(R.id.flGameScene)
-        val display = windowManager.defaultDisplay
         collectCatsGame = CollectCatsGame(
             sceneView = flGameScene,
-            sceneWidthPx = display.width,
-            sceneHeightPx = display.height,
             coroutineScope = lifecycleScope
         )
         collectCatsGame?.start()
