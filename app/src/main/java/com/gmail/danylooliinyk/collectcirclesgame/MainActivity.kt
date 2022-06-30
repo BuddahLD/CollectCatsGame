@@ -3,17 +3,18 @@ package com.gmail.danylooliinyk.collectcirclesgame
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.gmail.danylooliinyk.collectcatsgame.CollectCatsGame
 import com.gmail.danylooliinyk.collectcatsgame.view.CatViewContainer
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private var collectCatsGame: com.gmail.danylooliinyk.collectcatsgame.CollectCatsGame? = null
+    private var collectCatsGame: CollectCatsGame? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val flGameScene = findViewById<CatViewContainer>(R.id.flGameScene)
-        collectCatsGame = com.gmail.danylooliinyk.collectcatsgame.CollectCatsGame(
+        collectCatsGame = CollectCatsGame(
             sceneView = flGameScene,
             coroutineScope = lifecycleScope
         )
