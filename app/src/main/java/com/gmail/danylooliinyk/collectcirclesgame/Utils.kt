@@ -80,7 +80,7 @@ fun constructCatView(
     return ivButton
 }
 
-fun randomPoint(widthBound: Int, heightBound: Int, margins: Int = 24): Point {
+fun randomPoint(widthBound: Int, heightBound: Int, margins: Int = 24.toPx): Point {
     val positionX = Random.nextInt(widthBound - margins)
     val positionY = Random.nextInt(heightBound - margins)
     return Point(positionX, positionY)

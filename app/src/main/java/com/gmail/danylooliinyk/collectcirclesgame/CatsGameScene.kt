@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.children
+import androidx.core.view.doOnLayout
 import com.gmail.danylooliinyk.collectcirclesgame.Const.IS_DEBUG
 
 class CatsGameScene(
@@ -40,8 +41,10 @@ class CatsGameScene(
         spawnOne {
             tvCatsCollected
         }
-//        sceneWidthPx = sceneViewScoped.width
-//        sceneHeightPx = sceneViewScoped.height
+        sceneViewScoped.doOnLayout {
+            sceneWidthPx = sceneViewScoped.width
+            sceneHeightPx = sceneViewScoped.height
+        }
 
         if (IS_DEBUG) {
             tvDebugCats = constructTextView(
@@ -78,7 +81,7 @@ class CatsGameScene(
     }
 
     fun updateDebugCats() {
-        tvDebugCats.text = "Cats: ${sceneViewScoped.childCount}"
+        tvDebugCats.text = "Cats: $catsCount"
     }
 
     fun updateDebugCatsPositions() {
