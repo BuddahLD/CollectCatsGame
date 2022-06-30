@@ -2,10 +2,14 @@ package com.gmail.danylooliinyk.collectcirclesgame
 
 import android.content.Context
 import android.graphics.Point
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.children
 import com.gmail.danylooliinyk.collectcirclesgame.Const.IS_DEBUG
 
 class CatsGameScene(
@@ -20,11 +24,13 @@ class CatsGameScene(
         get() = sceneView ?: throw IllegalStateException("Accessing scene view out of scope")
     private val contextScoped: Context
         get() = sceneView?.context ?: throw IllegalStateException("Accessing context out of scope")
+    private val catsCount
+        get() = sceneViewScoped.children.count { it is ImageView }
 
     // Debug
     private lateinit var tvDebugCats: TextView
     private lateinit var tvDebugCatsPositions: TextView
-    private lateinit var tvDebugRemoveCats: TextView
+    private lateinit var tvDebugSceneSize: TextView
 
     init {
         tvCatsCollected = constructTextView(
@@ -34,32 +40,34 @@ class CatsGameScene(
         spawnOne {
             tvCatsCollected
         }
+//        sceneWidthPx = sceneViewScoped.width
+//        sceneHeightPx = sceneViewScoped.height
 
         if (IS_DEBUG) {
             tvDebugCats = constructTextView(
                 context = contextScoped,
                 text = "Cats: 0",
-                textSize = 4F,
+                textSize = 8F,
                 gravity = Gravity.START
             )
             tvDebugCatsPositions = constructTextView(
                 context = contextScoped,
                 text = "Positions: []",
-                textSize = 4F,
+                textSize = 8F,
                 gravity = Gravity.START,
                 position = Point(0, 30)
             )
-            tvDebugRemoveCats = constructTextView(
+            tvDebugSceneSize = constructTextView(
                 context = contextScoped,
-                text = "Remove: 0",
-                textSize = 4F,
+                text = "Scene size: 0:0",
+                textSize = 8F,
                 gravity = Gravity.END
             )
             spawn {
                 listOf(
                     tvDebugCats,
                     tvDebugCatsPositions,
-                    tvDebugRemoveCats
+                    tvDebugSceneSize
                 )
             }
         }
@@ -69,21 +77,22 @@ class CatsGameScene(
         tvCatsCollected.text = "Cats collected: $number"
     }
 
-    fun updateDebugCats(number: Int) {
-        tvDebugCats.text = "Cats: $number"
+    fun updateDebugCats() {
+        tvDebugCats.text = "Cats: ${sceneViewScoped.childCount}"
     }
 
-    fun updateDebugCatsPositions(positions: List<String>) {
-        tvDebugCatsPositions.text = "Positions: $positions"
-    }
-
-    fun updateDebugRemoveCats(number: Int) {
-        tvDebugRemoveCats.text = "Remove: $number"
+    fun updateDebugCatsPositions() {
+        val positions = sceneViewScoped
+            .children
+            .filter { it is ImageView }
+            .map {
+                (it.x to it.y).toString() + "\n"
+            }.toList()
+        tvDebugCatsPositions.text = "Positions: \n${positions}"
     }
 
     fun spawnCatAtRandomPosition() {
-        if (sceneViewScoped.childCount >= MAX_CATS_NUMBER) return
-
+        if (catsCount >= MAX_CATS_NUMBER) return
         spawnOne {
             constructCatView(
                 context = contextScoped,
@@ -91,6 +100,14 @@ class CatsGameScene(
                 color = randomColor()
             )
         }
+    }
+
+    fun showCatsCombo() {
+        Toast.makeText(contextScoped, "Cats combo!", Toast.LENGTH_SHORT).show()
+    }
+
+    fun updateSceneSize() {
+        tvDebugSceneSize.text = "Scene size: ${sceneViewScoped.width}:${sceneViewScoped.height}"
     }
 
     private fun spawn(viewToSpawn: () -> List<View>) {

@@ -44,7 +44,7 @@ fun constructTextView(
     context: Context,
     text: String,
     color: Int = Color.WHITE,
-    textSize: Float = 6F,
+    textSize: Float = 14F,
     position: Point = Point(0, 16),
     gravity: Int = Gravity.CENTER_HORIZONTAL
 ): TextView {
@@ -80,9 +80,9 @@ fun constructCatView(
     return ivButton
 }
 
-fun randomPoint(widthBound: Int, heightBound: Int): Point {
-    val positionX = Random.nextInt(widthBound)
-    val positionY = Random.nextInt(heightBound)
+fun randomPoint(widthBound: Int, heightBound: Int, margins: Int = 24): Point {
+    val positionX = Random.nextInt(widthBound - margins)
+    val positionY = Random.nextInt(heightBound - margins)
     return Point(positionX, positionY)
 }
 

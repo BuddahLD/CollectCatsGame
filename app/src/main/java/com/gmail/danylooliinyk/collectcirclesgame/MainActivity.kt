@@ -1,7 +1,6 @@
 package com.gmail.danylooliinyk.collectcirclesgame
 
 import android.os.Bundle
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 
@@ -12,7 +11,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val flGameScene = findViewById<FrameLayoutChildClickSelfDelete>(R.id.flGameScene)
+        val flGameScene = findViewById<FrameLayoutImageViewSelfDelete>(R.id.flGameScene)
         val display = windowManager.defaultDisplay
         collectCatsGame = CollectCatsGame(
             sceneView = flGameScene,

@@ -4,8 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageView
 
-class FrameLayoutChildClickSelfDelete : FrameLayout, View.OnClickListener {
+class FrameLayoutImageViewSelfDelete : FrameLayout, View.OnClickListener {
 
     private var listener: (() -> Unit)? = null
 
@@ -15,11 +16,14 @@ class FrameLayoutChildClickSelfDelete : FrameLayout, View.OnClickListener {
 
     override fun addView(child: View?) {
         super.addView(child)
-        child?.setOnClickListener(this)
+        if (child is ImageView) {
+            child.setOnClickListener(this)
+        }
     }
 
     override fun onClick(v: View?) {
         removeView(v)
+        listener?.invoke()
     }
 
     fun setOnChildViewRemovedListener(listener: () -> Unit) {
