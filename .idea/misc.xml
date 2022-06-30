@@ -5,8 +5,12 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.14556004036326942" />
         <entry key="../../Library/Android/sdk/platforms/android-32/data/res/layout/activity_list_item.xml" value="0.15896739130434784" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.158" />
         <entry key="app/src/main/res/drawable/ic_cat_24.xml" value="0.135" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.158" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.15896739130434784" />
+        <entry key="collectcatsgame/src/main/res/drawable/ic_cat_24.xml" value="0.158" />
       </map>
     </option>
   </component>
