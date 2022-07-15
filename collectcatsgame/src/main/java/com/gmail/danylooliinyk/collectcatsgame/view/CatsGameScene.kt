@@ -2,6 +2,7 @@ package com.gmail.danylooliinyk.collectcatsgame.view
 
 import android.content.Context
 import android.graphics.Point
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -40,11 +41,13 @@ class CatsGameScene(
 
     init {
         constructViews()
-        constructDebugViews()
+        if (IS_DEBUG) {
+            constructDebugViews()
+        }
 
         sceneViewScoped.doOnLayout {
-            sceneWidthPx = sceneViewScoped.width
-            sceneHeightPx = sceneViewScoped.height
+            sceneWidthPx = it.width
+            sceneHeightPx = it.height
 
             spawnOne {
                 tvCatsCollected
@@ -63,7 +66,6 @@ class CatsGameScene(
     }
 
     private fun constructDebugViews() {
-        if (IS_DEBUG) {
             tvDebugCats = constructTextView(
                 context = contextScoped,
                 text = "Cats: 0",
@@ -83,7 +85,6 @@ class CatsGameScene(
                 textSize = 8F,
                 gravity = Gravity.END
             )
-        }
     }
 
     private fun constructViews() {
